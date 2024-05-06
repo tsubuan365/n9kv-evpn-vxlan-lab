@@ -3,14 +3,14 @@
 | --- | --- |
 | Description | A lab to demonstrate EVPN over VXLAN on Cisco Nexus 9000v Switch with containerlab |
 | Components | Cisco Nexus 9000v, Multitool Alpine Linux |
-| Resource requirements | N/A, For your reference: It took about 6 minutes from the execution of the "containerlab deploy" command until the ping between servers was communicated. Environment: AWS m5zn.metal instance (48 vCPU, 192 GiB RAM) |
+| Resource requirements | N/A[^1] |
 | Topology file | n9kv-evpn-vxlan.clab.yml |
 | Name | n9kv-evpn-vxlan |
-| Version information | vr-n9kv:9.3.13, containerlab:0.54.2, docker-ce:24.0.5 |
+| Version information | vr-n9kv:9.3.13, [containerlab](https://containerlab.dev):0.54.2, [docker-ce](https://www.docker.com):24.0.5 |
 
 # Description
 The lab has Cisco Nexus 9000v connected in a Clos topology: two nodes as Spine and three nodes as Leaf, all with management interfaces also connected to the containerlab docker network.
-The Cisco Nexus 9000v VM is launched as a container using vrnetlab integration.
+The Cisco Nexus 9000v VM is launched as a container using (vrnetlab)(https://github.com/vrnetlab/vrnetlab) integration.
 The configuration uses iBGP as the underlay, with the reachability of each neighbor via OSPF; the overlay runs EVPN over VXLAN, and BUM handling is handled via ingress replication.
 BUM handling is handled through Ingress Replication.
 CE1 and CE2 are assigned to VLAN 10, CE3 and CE4 are assigned to VLAN 20, and there is no interconnectivity between VLAN 10 and VLAN 20.
@@ -244,3 +244,5 @@ C   10     0000.0000.1111   dynamic  0         F      F    nve1(10.0.0.11)
 C   20     0000.0000.4444   dynamic  0         F      F    nve1(10.0.0.13)
 LEAF2# 
 ```
+
+[^1]: For your reference: It took about 6 minutes from the execution of the `containerlab deploy` command until the ping between servers was communicated. Environment: [AWS m5zn.metal](https://docs.aws.amazon.com/ec2/latest/instancetypes/gp.html) instance (48 vCPU, 192 GiB RAM)
