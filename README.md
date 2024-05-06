@@ -3,7 +3,7 @@
 | --- | --- |
 | Description | A lab to demonstrate EVPN over VXLAN on Cisco Nexus 9000v Switch with containerlab |
 | Components | Cisco Nexus 9000v, Multitool Alpine Linux |
-| Resource requirements | N/A |
+| Resource requirements | N/A, For your reference: It took about 6 minutes from the execution of the "containerlab deploy" command until the ping between SEVER was communicated. Environment: AWS m5zn.metal instance (48 vCPU, 192 GiB RAM) |
 | Topology file | n9kv-evpn-vxlan.clab.yml |
 | Name | n9kv-evpn-vxlan |
 | Version information | vr-n9kv:9.3.13, containerlab:0.54.2, docker-ce:24.0.5 |
