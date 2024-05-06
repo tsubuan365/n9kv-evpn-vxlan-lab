@@ -13,23 +13,23 @@ topology:
 
   nodes:
     spine1:
-      #startup-config: ./configs/spine1.cfg
+      startup-config: ./configs/spine1.cfg
       group: spine
 
     spine2:
-      #startup-config: ./configs/spine2.cfg
+      startup-config: ./configs/spine2.cfg
       group: spine
 
     leaf1:
-      #startup-config: ./configs/leaf1.cfg
+      startup-config: ./configs/leaf1.cfg
       group: leaf
 
     leaf2:
-      #startup-config: ./configs/leaf2.cfg
+      startup-config: ./configs/leaf2.cfg
       group: leaf
 
     leaf3:
-      #startup-config: ./configs/leaf3.cfg
+      startup-config: ./configs/leaf3.cfg
       group: leaf
 
     server1:
