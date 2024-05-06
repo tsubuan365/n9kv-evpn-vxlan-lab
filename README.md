@@ -10,7 +10,7 @@
 
 # Description
 The lab has Cisco Nexus 9000v connected in a Clos topology: two nodes as Spine and three nodes as Leaf, all with management interfaces also connected to the containerlab docker network.
-The Cisco Nexus 9000v VM is launched as a container using (vrnetlab)(https://github.com/vrnetlab/vrnetlab) integration.
+The Cisco Nexus 9000v VM is launched as a container using [vrnetlab](https://github.com/vrnetlab/vrnetlab) integration.
 The configuration uses iBGP as the underlay, with the reachability of each neighbor via OSPF; the overlay runs EVPN over VXLAN, and BUM handling is handled via ingress replication.
 BUM handling is handled through Ingress Replication.
 CE1 and CE2 are assigned to VLAN 10, CE3 and CE4 are assigned to VLAN 20, and there is no interconnectivity between VLAN 10 and VLAN 20.
