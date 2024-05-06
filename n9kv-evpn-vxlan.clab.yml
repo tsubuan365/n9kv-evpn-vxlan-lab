@@ -1,0 +1,93 @@
+name: n9kv-evpn-mpls
+prefix: ""
+
+topology:
+  defaults:
+    kind: cisco_n9kv
+
+  kinds:
+    cisco_n9kv:
+      image: ${IMAGE_REPO:=}vrnetlab/vr-n9kv:9.3.13
+    linux:
+      image: ghcr.io/hellt/network-multitool
+
+  nodes:
+    spine1:
+      #startup-config: ./configs/spine1.cfg
+      group: spine
+
+    spine2:
+      #startup-config: ./configs/spine2.cfg
+      group: spine
+
+    leaf1:
+      #startup-config: ./configs/leaf1.cfg
+      group: leaf
+
+    leaf2:
+      #startup-config: ./configs/leaf2.cfg
+      group: leaf
+
+    leaf3:
+      #startup-config: ./configs/leaf3.cfg
+      group: leaf
+
+    server1:
+      kind: linux
+      binds:
+        - ./configs/server1.sh:/tmp/eth1.sh
+      env:
+        PS1: '\h:\w\$ '
+      exec:
+        - bash /tmp/eth1.sh
+        - ip link set eth1.10 address 00:00:00:00:11:11
+        - ip a add 192.168.10.1/24 dev eth1.10
+      group: server
+
+    server2:
+      kind: linux
+      binds:
+        - ./configs/server2.sh:/tmp/eth1.sh
+      env:
+        PS1: '\h:\w\$ '
+      exec:
+        - bash /tmp/eth1.sh
+        - ip link set eth1.10 address 00:00:00:00:22:22
+        - ip a add 192.168.10.2/24 dev eth1.10
+      group: server
+
+    server3:
+      kind: linux
+      binds:
+        - ./configs/server3.sh:/tmp/eth1.sh
+      env:
+        PS1: '\h:\w\$ '
+      exec:
+        - bash /tmp/eth1.sh
+        - ip link set eth1.20 address 00:00:00:00:33:33
+        - ip a add 192.168.20.3/24 dev eth1.20
+      group: server
+
+    server4:
+      kind: linux
+      binds:
+        - ./configs/server4.sh:/tmp/eth1.sh
+      env:
+        PS1: '\h:\w\$ '
+      exec:
+        - bash /tmp/eth1.sh
+        - ip link set eth1.20 address 00:00:00:00:44:44
+        - ip a add 192.168.20.4/24 dev eth1.20
+      group: server
+
+  links:
+    - endpoints: ["spine1:eth1", "leaf1:eth1"]
+    - endpoints: ["spine1:eth2", "leaf2:eth1"]
+    - endpoints: ["spine1:eth3", "leaf3:eth1"]
+    - endpoints: ["spine2:eth1", "leaf1:eth2"]
+    - endpoints: ["spine2:eth2", "leaf2:eth2"]
+    - endpoints: ["spine2:eth3", "leaf3:eth2"]
+    - endpoints: ["leaf1:eth10", "server1:eth1"]
+    - endpoints: ["leaf2:eth10", "server2:eth1"]
+    - endpoints: ["leaf2:eth11", "server3:eth1"]
+    - endpoints: ["leaf3:eth10", "server4:eth1"]
